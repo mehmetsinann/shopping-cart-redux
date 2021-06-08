@@ -9,7 +9,7 @@ class ResetCounter extends Component{
       <div>
         <button onClick={(e)=>{
           this.props.dispatch(resetCounter())
-        }}>sıfırla</button>
+        }}>Sıfırla</button>
       </div>
     )
   }
