@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   return (
+<<<<<<< Updated upstream
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -18,6 +19,14 @@ function App() {
           Learn React
         </a>
       </header>
+=======
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+      <Counter />
+      <IncreaseCounter />
+      <DecreaseCounter />
+      <IncreaseByTwoCounter />
+      <ResetCounter />
+>>>>>>> Stashed changes
     </div>
   );
 }
