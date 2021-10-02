@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import counterReducer from "./counterReducer";
+import changeCategoryReducer from "./changeCategoryReducer";
 
-const reducers = combineReducers({
-  counterReducer,
+const rootReducer = combineReducers({
+  changeCategoryReducer,
 });
 
-export default reducers
+export default rootReducer;
