@@ -1,5 +1,10 @@
 export const initialState = {
-  currentCategory: { id: 0 },
+  currentCategory: {
+    categoryName: "All Products",
+    id: 0,
+    seoUrl: "all-products",
+  },
   categories: [],
   products: [],
+  cart: [],
 };

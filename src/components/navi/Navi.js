@@ -7,12 +7,9 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   NavbarText,
 } from "reactstrap";
+import CartSummary from "../cart/CartSummary";
 
 const Example = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,34 +17,20 @@ const Example = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
-        </Collapse>
+    <div style={{ marginBottom: "16px" }}>
+      <Navbar
+        color="light"
+        light
+        expand="md"
+        style={{ justifyContent: "space-between", padding: "0px 32px" }}
+      >
+        <NavbarBrand href="/">Shopping Cart Demo</NavbarBrand>
+        <Nav className="mr-auto" navbar>
+          <CartSummary />
+          <NavItem>
+            <NavLink href="https://github.com/mehmetsinann">GitHub</NavLink>
+          </NavItem>
+        </Nav>
       </Navbar>
     </div>
   );
