@@ -20,3 +20,10 @@ export function removeFromCart(product) {
     payload: product,
   };
 }
+
+export function removeAllFromCart(cart) {
+  return {
+    type: actionTypes.REMOVE_ALL_FROM_CART,
+    payload: cart,
+  };
+}

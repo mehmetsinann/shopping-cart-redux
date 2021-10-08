@@ -7,7 +7,6 @@ export default function cartReducer(state = initialState.cart, action) {
       var addedItem = state.find(
         (c) => c.product.id === action.payload.product.id
       );
-
       if (addedItem) {
         var newState = state.map((cartItem) => {
           if (cartItem.product.id === action.payload.product.id) {
@@ -45,6 +44,10 @@ export default function cartReducer(state = initialState.cart, action) {
         (cartItem) => cartItem.product.id !== action.payload.id
       );
       return newState3;
+
+    case actionTypes.REMOVE_ALL_FROM_CART:
+      state = [];
+      return state;
 
     default:
       return state;

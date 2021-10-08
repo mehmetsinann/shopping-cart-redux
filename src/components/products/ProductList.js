@@ -11,14 +11,19 @@ class ProductList extends Component {
     this.props.actions.getProducts();
   }
   addToCart = (product) => {
-    this.props.actions.addToCart({ quantity: 1, product });
-    alertify.success(product.productName + " added to cart");
+    if (product.unitsInStock > 0) {
+      this.props.actions.addToCart({ quantity: 1, product });
+      alertify.success(product.productName + " added to cart");
+    } else {
+      alertify.warning(product.productName + " out of stock");
+    }
   };
+
   render() {
     return (
       <div>
         <h2>
-          <Badge style={{ backgroundColor: "#ffbb00" }}>Products</Badge>
+          <Badge style={{ backgroundColor: "#ffbb00" }}>Products</Badge> -
           <Badge style={{ backgroundColor: "green", marginLeft: "8px" }}>
             {this.props.currentCategory.categoryName}
           </Badge>
@@ -66,6 +71,7 @@ function mapStateToProps(state) {
   return {
     currentCategory: state.changeCategoryReducer,
     products: state.productListReducer,
+    cart: state.cartReducer,
   };
 }
 

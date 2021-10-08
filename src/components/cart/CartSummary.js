@@ -32,6 +32,7 @@ class CartSummary extends Component {
           <Table>
             <thead style={{ textAlign: "center" }}>
               <tr>
+                <th></th>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price</th>
@@ -42,18 +43,22 @@ class CartSummary extends Component {
               {this.props.cart.map((cartItem) => (
                 <tr key={cartItem.product.id}>
                   <td>
-                    <Button
-                      onClick={() =>
-                        this.props.actions.decreaseFromCart(cartItem.product)
-                      }
-                      style={{
-                        backgroundColor: "#FFD302",
-                        color: "black",
-                        fontWeight: "bolder",
-                      }}
-                    >
-                      -
-                    </Button>
+                    {cartItem.quantity > 1 ? (
+                      <Button
+                        onClick={() =>
+                          this.props.actions.decreaseFromCart(cartItem.product)
+                        }
+                        style={{
+                          backgroundColor: "#FFD302",
+                          color: "black",
+                          fontWeight: "bolder",
+                        }}
+                      >
+                        -
+                      </Button>
+                    ) : (
+                      ""
+                    )}
                   </td>
                   <td>{cartItem.product.productName}</td>
                   <td>{cartItem.quantity}</td>
@@ -78,10 +83,18 @@ class CartSummary extends Component {
           <p style={{ textAlign: "center" }}>
             Total Amount : ${this.totalPrice()}
           </p>
+
           <DropdownItem divider />
-          <DropdownItem style={{ textAlign: "center" }}>
-            Go to Cart
-          </DropdownItem>
+          <Button
+            onClick={() => this.props.actions.removeAllFromCart()}
+            style={{
+              width: "100%",
+              backgroundColor: "#ff0000",
+              fontWeight: "bold",
+            }}
+          >
+            Remove All
+          </Button>
         </DropdownMenu>
       </UncontrolledDropdown>
     );
@@ -128,6 +141,10 @@ function mapDispatchToProps(dispatch) {
         dispatch
       ),
       removeFromCart: bindActionCreators(cartActions.removeFromCart, dispatch),
+      removeAllFromCart: bindActionCreators(
+        cartActions.removeAllFromCart,
+        dispatch
+      ),
     },
   };
 }
