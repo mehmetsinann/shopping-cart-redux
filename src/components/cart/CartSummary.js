@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  Badge,
-  Button,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
@@ -22,7 +20,6 @@ class CartSummary extends Component {
   }
 
   renderSummary() {
-    let totalPrice = 0;
     return (
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
@@ -49,17 +46,25 @@ class CartSummary extends Component {
             </tbody>
           </Table>
           <p style={{ textAlign: "center" }}>
-            {this.props.cart.map((cartItem) => {
-              totalPrice =
-                totalPrice + cartItem.product.unitPrice * cartItem.quantity;
-            })}
-            Total Price : {totalPrice}
+            Total Amount : {this.totalPrice()}
           </p>
           <DropdownItem divider />
-          <DropdownItem>Go to Cart</DropdownItem>
+          <DropdownItem style={{ textAlign: "center" }}>
+            Go to Cart
+          </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
     );
+  }
+
+  totalPrice() {
+    let totalAmount = 0;
+    for (let i = 0; i < this.props.cart.length; i++) {
+      totalAmount =
+        totalAmount +
+        this.props.cart[i].product.unitPrice * this.props.cart[i].quantity;
+    }
+    return totalAmount;
   }
 
   render() {

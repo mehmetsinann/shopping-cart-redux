@@ -5,7 +5,7 @@
       "categoryId": 2,
       "productName": "Chai",
       "quantityPerUnit": "48 - 6 oz jars",
-      "unitPrice": "24",
+      "unitPrice": 24,
       "unitsInStock": 53
     },
     {
@@ -13,7 +13,7 @@
       "categoryId": 1,
       "productName": "Chang",
       "quantityPerUnit": "24 - 12 oz bottles",
-      "unitPrice": "21",
+      "unitPrice": 21,
       "unitsInStock": 17
     },
     {
@@ -21,7 +21,7 @@
       "categoryId": 5,
       "productName": "Wholegrain",
       "quantityPerUnit": "1 kg pkg.",
-      "unitPrice": "8",
+      "unitPrice": 8,
       "unitsInStock": 23
     },
     {
@@ -29,7 +29,7 @@
       "categoryId": 1,
       "productName": "Chef Anton's Cajun Seasoning",
       "quantityPerUnit": "48 - 6 oz jars",
-      "unitPrice": "222",
+      "unitPrice": 222,
       "unitsInStock": 53
     },
     {
@@ -37,7 +37,7 @@
       "categoryId": 2,
       "productName": "Chef Anton's Gumbo Mix",
       "quantityPerUnit": "36 boxes",
-      "unitPrice": "21",
+      "unitPrice": 21,
       "unitsInStock": 0
     },
     {
