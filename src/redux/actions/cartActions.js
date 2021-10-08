@@ -7,9 +7,16 @@ export function addToCart(cartItem) {
   };
 }
 
-export function removeFromCart(cartItem) {
+export function decreaseFromCart(product) {
+  return {
+    type: actionTypes.DECREASE_FROM_CART,
+    payload: product,
+  };
+}
+
+export function removeFromCart(product) {
   return {
     type: actionTypes.REMOVE_FROM_CART,
-    payload: cartItem,
+    payload: product,
   };
 }

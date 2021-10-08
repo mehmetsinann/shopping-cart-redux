@@ -9,7 +9,7 @@ const Example = (props) => {
         color="light"
         light
         expand="md"
-        style={{ justifyContent: "space-between", padding: "0px 32px" }}
+        style={{ justifyContent: "space-around" }}
       >
         <NavbarBrand href="/">Shopping Cart Demo</NavbarBrand>
         <Nav className="mr-auto" navbar>
