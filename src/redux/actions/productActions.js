@@ -6,7 +6,8 @@ export function getProductsSuccess(products) {
 
 export function getProducts(categoryId) {
   return function (dispatch) {
-    let url = "http://localhost:3000/products";
+    let url =
+      "https://my-json-server.typicode.com/mehmetsinann/shopping-cart-db/products";
     if (categoryId) {
       url = url + "?categoryId=" + categoryId;
     }

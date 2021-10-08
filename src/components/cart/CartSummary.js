@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  Badge,
-  Button,
   DropdownItem,
+  Button,
   DropdownMenu,
   DropdownToggle,
   NavItem,
@@ -11,6 +10,8 @@ import {
   Table,
   UncontrolledDropdown,
 } from "reactstrap";
+import { bindActionCreators } from "redux";
+import * as cartActions from "../../redux/actions/cartActions";
 
 class CartSummary extends Component {
   renderEmpty() {
@@ -22,16 +23,16 @@ class CartSummary extends Component {
   }
 
   renderSummary() {
-    let totalPrice = 0;
     return (
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          Cart - ({this.props.cart.length})
+          Cart - ({this.totalQuantity()})
         </DropdownToggle>
         <DropdownMenu>
           <Table>
             <thead style={{ textAlign: "center" }}>
               <tr>
+                <th></th>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price</th>
@@ -41,25 +42,80 @@ class CartSummary extends Component {
             <tbody style={{ textAlign: "center" }}>
               {this.props.cart.map((cartItem) => (
                 <tr key={cartItem.product.id}>
+                  <td>
+                    {cartItem.quantity > 1 ? (
+                      <Button
+                        onClick={() =>
+                          this.props.actions.decreaseFromCart(cartItem.product)
+                        }
+                        style={{
+                          backgroundColor: "#FFD302",
+                          color: "black",
+                          fontWeight: "bolder",
+                        }}
+                      >
+                        -
+                      </Button>
+                    ) : (
+                      ""
+                    )}
+                  </td>
                   <td>{cartItem.product.productName}</td>
                   <td>{cartItem.quantity}</td>
-                  <td>{cartItem.product.unitPrice * cartItem.quantity}</td>
+                  <td>${cartItem.product.unitPrice * cartItem.quantity}</td>
+                  <td>
+                    <Button
+                      onClick={() =>
+                        this.props.actions.removeFromCart(cartItem.product)
+                      }
+                      style={{
+                        backgroundColor: "#FF0000",
+                        fontWeight: "bolder",
+                      }}
+                    >
+                      x
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </Table>
           <p style={{ textAlign: "center" }}>
-            {this.props.cart.map((cartItem) => {
-              totalPrice =
-                totalPrice + cartItem.product.unitPrice * cartItem.quantity;
-            })}
-            Total Price : {totalPrice}
+            Total Amount : ${this.totalPrice()}
           </p>
+
           <DropdownItem divider />
-          <DropdownItem>Go to Cart</DropdownItem>
+          <Button
+            onClick={() => this.props.actions.removeAllFromCart()}
+            style={{
+              width: "100%",
+              backgroundColor: "#ff0000",
+              fontWeight: "bold",
+            }}
+          >
+            Remove All
+          </Button>
         </DropdownMenu>
       </UncontrolledDropdown>
     );
+  }
+
+  totalPrice() {
+    let totalAmount = 0;
+    for (let i = 0; i < this.props.cart.length; i++) {
+      totalAmount =
+        totalAmount +
+        this.props.cart[i].product.unitPrice * this.props.cart[i].quantity;
+    }
+    return totalAmount;
+  }
+
+  totalQuantity() {
+    let totalQuantity = 0;
+    for (let i = 0; i < this.props.cart.length; i++) {
+      totalQuantity = totalQuantity + this.props.cart[i].quantity;
+    }
+    return totalQuantity;
   }
 
   render() {
@@ -77,4 +133,20 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CartSummary);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      decreaseFromCart: bindActionCreators(
+        cartActions.decreaseFromCart,
+        dispatch
+      ),
+      removeFromCart: bindActionCreators(cartActions.removeFromCart, dispatch),
+      removeAllFromCart: bindActionCreators(
+        cartActions.removeAllFromCart,
+        dispatch
+      ),
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartSummary);
