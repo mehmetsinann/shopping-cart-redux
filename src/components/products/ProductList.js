@@ -10,10 +10,16 @@ class ProductList extends Component {
   componentDidMount() {
     this.props.actions.getProducts();
   }
+
   addToCart = (product) => {
     if (product.unitsInStock > 0) {
-      this.props.actions.addToCart({ quantity: 1, product });
-      alertify.success(product.productName + " added to cart");
+      var addedItem = this.props.cart.find((c) => c.product.id === product.id);
+      if (addedItem && addedItem.quantity === product.unitsInStock) {
+        alertify.warning("Not enough stock for " + product.productName);
+      } else {
+        this.props.actions.addToCart({ quantity: 1, product });
+        alertify.success(product.productName + " added to cart");
+      }
     } else {
       alertify.warning(product.productName + " out of stock");
     }
