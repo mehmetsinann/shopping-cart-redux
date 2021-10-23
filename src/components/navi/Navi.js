@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 import CartSummary from "../cart/CartSummary";
 
-const Example = (props) => {
+const TopNav = (props) => {
   return (
     <div style={{ marginBottom: "16px" }}>
       <Navbar
@@ -28,4 +28,4 @@ const Example = (props) => {
   );
 };
 
-export default Example;
+export default TopNav;

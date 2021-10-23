@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   DropdownItem,
@@ -13,8 +13,8 @@ import {
 import { bindActionCreators } from "redux";
 import * as cartActions from "../../redux/actions/cartActions";
 
-class CartSummary extends Component {
-  renderEmpty() {
+const CartSummary = (props) => {
+  function renderEmpty() {
     return (
       <NavItem>
         <NavLink>Cart is empty!</NavLink>
@@ -22,11 +22,11 @@ class CartSummary extends Component {
     );
   }
 
-  renderSummary() {
+  function renderSummary() {
     return (
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          Cart - ({this.totalQuantity()})
+          Cart - ({totalQuantity()})
         </DropdownToggle>
         <DropdownMenu>
           <Table>
@@ -40,13 +40,13 @@ class CartSummary extends Component {
               </tr>
             </thead>
             <tbody style={{ textAlign: "center" }}>
-              {this.props.cart.map((cartItem) => (
+              {props.cart.map((cartItem) => (
                 <tr key={cartItem.product.id}>
                   <td>
                     {cartItem.quantity > 1 ? (
                       <Button
                         onClick={() =>
-                          this.props.actions.decreaseFromCart(cartItem.product)
+                          props.actions.decreaseFromCart(cartItem.product)
                         }
                         style={{
                           backgroundColor: "#FFD302",
@@ -66,7 +66,7 @@ class CartSummary extends Component {
                   <td>
                     <Button
                       onClick={() =>
-                        this.props.actions.removeFromCart(cartItem.product)
+                        props.actions.removeFromCart(cartItem.product)
                       }
                       style={{
                         backgroundColor: "#FF0000",
@@ -80,13 +80,11 @@ class CartSummary extends Component {
               ))}
             </tbody>
           </Table>
-          <p style={{ textAlign: "center" }}>
-            Total Amount : ${this.totalPrice()}
-          </p>
+          <p style={{ textAlign: "center" }}>Total Amount : ${totalPrice()}</p>
 
           <DropdownItem divider />
           <Button
-            onClick={() => this.props.actions.removeAllFromCart()}
+            onClick={() => props.actions.removeAllFromCart()}
             style={{
               width: "100%",
               backgroundColor: "#ff0000",
@@ -100,32 +98,24 @@ class CartSummary extends Component {
     );
   }
 
-  totalPrice() {
+  function totalPrice() {
     let totalAmount = 0;
-    for (let i = 0; i < this.props.cart.length; i++) {
+    for (let i = 0; i < props.cart.length; i++) {
       totalAmount =
-        totalAmount +
-        this.props.cart[i].product.unitPrice * this.props.cart[i].quantity;
+        totalAmount + props.cart[i].product.unitPrice * props.cart[i].quantity;
     }
     return totalAmount;
   }
 
-  totalQuantity() {
+  function totalQuantity() {
     let totalQuantity = 0;
-    for (let i = 0; i < this.props.cart.length; i++) {
-      totalQuantity = totalQuantity + this.props.cart[i].quantity;
+    for (let i = 0; i < props.cart.length; i++) {
+      totalQuantity = totalQuantity + props.cart[i].quantity;
     }
     return totalQuantity;
   }
-
-  render() {
-    return (
-      <div>
-        {this.props.cart.length > 0 ? this.renderSummary() : this.renderEmpty()}
-      </div>
-    );
-  }
-}
+  return <div>{props.cart.length > 0 ? renderSummary() : renderEmpty()}</div>;
+};
 
 function mapStateToProps(state) {
   return {

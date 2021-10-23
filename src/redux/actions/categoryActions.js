@@ -9,7 +9,7 @@ export function getCategoriesSuccess(categories) {
 }
 
 export function getCategories() {
-  return function (dispatch) {
+  return async function (dispatch) {
     let url =
       "https://my-json-server.typicode.com/mehmetsinann/shopping-cart-redux/categories";
     return fetch(url)
