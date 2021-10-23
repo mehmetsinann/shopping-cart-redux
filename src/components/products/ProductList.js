@@ -9,7 +9,7 @@ import alertify from "alertifyjs";
 const ProductList = (props) => {
   useEffect(() => {
     props.actions.getProducts();
-  });
+  }, [props.actions]);
 
   const addToCart = (product) => {
     if (product.unitsInStock > 0) {

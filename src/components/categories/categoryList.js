@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Badge, ListGroup, ListGroupItem } from "reactstrap";
 import { bindActionCreators } from "redux";
@@ -6,40 +6,38 @@ import * as categoryActions from "../../redux/actions/categoryActions";
 import * as productActions from "../../redux/actions/productActions";
 import { initialState } from "../../redux/reducers/initialState";
 
-class CategoryList extends Component {
-  componentDidMount() {
-    this.props.actions.getCategories();
-  }
+const CategoryList = (props) => {
+  useEffect(() => {
+    props.actions.getCategories();
+  }, [props.actions]);
 
-  selectCategory = (category) => {
-    this.props.actions.changeCategory(category);
-    this.props.actions.getProducts(category.id);
+  const selectCategory = (category) => {
+    props.actions.changeCategory(category);
+    props.actions.getProducts(category.id);
   };
 
-  render() {
-    return (
-      <div>
-        <h2>
-          <Badge style={{ backgroundColor: "#ffbb00" }}>Categories</Badge>
-        </h2>
-        <ListGroup>
-          {this.props.categories.map((category) => (
-            <ListGroupItem
-              active={
-                category.id === this.props.currentCategory.id ||
-                initialState.category === this.props.currentCategory.id
-              }
-              onClick={() => this.selectCategory(category)}
-              key={category.id}
-            >
-              {category.categoryName}
-            </ListGroupItem>
-          ))}
-        </ListGroup>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h2>
+        <Badge style={{ backgroundColor: "#ffbb00" }}>Categories</Badge>
+      </h2>
+      <ListGroup>
+        {props.categories.map((category) => (
+          <ListGroupItem
+            active={
+              category.id === props.currentCategory.id ||
+              initialState.category === props.currentCategory.id
+            }
+            onClick={() => selectCategory(category)}
+            key={category.id}
+          >
+            {category.categoryName}
+          </ListGroupItem>
+        ))}
+      </ListGroup>
+    </div>
+  );
+};
 
 function mapStateToProps(state) {
   return {
