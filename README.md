@@ -13,8 +13,8 @@ This web application allows users to view, filter, and add products to their sho
 
 To run the application locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/product-listing-app.git`
-2. Navigate to the project directory: `cd product-listing-app`
+1. Clone the repository: `git clone https://github.com/mehmetsinann/shopping-cart-redux.git`
+2. Navigate to the project directory: `cd shopping-cart-redux`
 3. Install the dependencies: `yarn`
 4. Start the development server: `yarn start`
 5. Open your browser and visit: `http://localhost:3000`
